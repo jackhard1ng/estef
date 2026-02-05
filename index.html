@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Princesa Hermosa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --hello-kitty-pink: #ff69b4;
+            --soft-pink: #ffb6c1;
+            --light-pink: #ffc0cb;
+            --cream: #fff5ee;
+            --red-love: #ff1493;
+            --hello-kitty-red: #e31c79;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #fff0f5 25%, #ffe4ec 50%, #ffd1dc 75%, #ffb6c1 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='8' fill='%23ff69b4'/%3E%3C/svg%3E"), auto;
+        }
+
+        /* Floating Hearts Animation */
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float-up 8s ease-in infinite;
+            opacity: 0;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Hello Kitty Face Decoration */
+        .kitty-decoration {
+            position: fixed;
+            font-size: 40px;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .header::before {
+            content: "🎀";
+            font-size: 60px;
+            display: block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .main-title {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            background: linear-gradient(45deg, #ff1493, #ff69b4, #e31c79, #ff1493);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 4s ease infinite;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+            margin: 20px 0;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #e31c79;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        /* Hello Kitty Banner */
+        .kitty-banner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .kitty-face {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50% 50% 45% 45%;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.4);
+            animation: wiggle 3s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .kitty-face::before,
+        .kitty-face::after {
+            content: "";
+            position: absolute;
+            width: 25px;
+            height: 35px;
+            background: white;
+            top: -20px;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .kitty-face::before {
+            left: 8px;
+            transform: rotate(-10deg);
+        }
+
+        .kitty-face::after {
+            right: 8px;
+            transform: rotate(10deg);
+        }
+
+        .kitty-face .eyes {
+            position: absolute;
+            top: 35%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .kitty-face .eye {
+            width: 8px;
+            height: 10px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        .kitty-face .nose {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 6px;
+            background: #ffcc00;
+            border-radius: 50%;
+        }
+
+        .kitty-face .whiskers {
+            position: absolute;
+            top: 55%;
+            width: 100%;
+        }
+
+        .kitty-face .whisker {
+            position: absolute;
+            width: 25px;
+            height: 2px;
+            background: #333;
+        }
+
+        .kitty-face .whisker:nth-child(1) { left: -15px; top: -5px; transform: rotate(-10deg); }
+        .kitty-face .whisker:nth-child(2) { left: -18px; top: 5px; }
+        .kitty-face .whisker:nth-child(3) { left: -15px; top: 15px; transform: rotate(10deg); }
+        .kitty-face .whisker:nth-child(4) { right: -15px; top: -5px; transform: rotate(10deg); }
+        .kitty-face .whisker:nth-child(5) { right: -18px; top: 5px; }
+        .kitty-face .whisker:nth-child(6) { right: -15px; top: 15px; transform: rotate(-10deg); }
+
+        .kitty-face .bow {
+            position: absolute;
+            top: -25px;
+            right: -10px;
+            font-size: 35px;
+            transform: rotate(15deg);
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));
+        }
+
+        /* Message Cards */
+        .love-message {
+            background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,240,245,0.95));
+            border-radius: 30px;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 800px;
+            box-shadow:
+                0 20px 60px rgba(255, 105, 180, 0.3),
+                inset 0 0 30px rgba(255, 182, 193, 0.3);
+            border: 3px solid var(--soft-pink);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .love-message::before {
+            content: "💕";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.2); }
+        }
+
+        .love-message h2 {
+            font-family: 'Pacifico', cursive;
+            color: var(--hello-kitty-red);
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .love-message p {
+            color: #555;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        /* Photo Gallery */
+        .gallery-section {
+            padding: 40px 20px;
+        }
+
+        .gallery-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            color: var(--hello-kitty-red);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .gallery-title::after {
+            content: " 📸✨";
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 25px;
+            padding: 15px;
+            box-shadow:
+                0 15px 35px rgba(255, 105, 180, 0.25),
+                0 5px 15px rgba(0,0,0,0.1);
+            transform: rotate(var(--rotation, 0deg));
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .photo-card:nth-child(1) { --rotation: -3deg; }
+        .photo-card:nth-child(2) { --rotation: 2deg; }
+        .photo-card:nth-child(3) { --rotation: -2deg; }
+
+        .photo-card:hover {
+            transform: rotate(0deg) scale(1.05) translateY(-10px);
+            box-shadow:
+                0 25px 50px rgba(255, 105, 180, 0.4),
+                0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .photo-card::before {
+            content: "🎀";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            z-index: 10;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 4px solid var(--soft-pink);
+        }
+
+        .photo-caption {
+            text-align: center;
+            padding: 15px 10px 5px;
+            font-family: 'Pacifico', cursive;
+            color: var(--hello-kitty-red);
+            font-size: 1.2rem;
+        }
+
+        /* Reasons Section */
+        .reasons-section {
+            background: linear-gradient(180deg, transparent, rgba(255,182,193,0.3), transparent);
+            padding: 60px 20px;
+            margin: 40px 0;
+        }
+
+        .reasons-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            color: var(--hello-kitty-red);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .reason-card {
+            background: linear-gradient(135deg, white 0%, #fff5f8 100%);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+            border: 2px solid rgba(255, 105, 180, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.3);
+        }
+
+        .reason-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .reason-card h3 {
+            color: var(--hello-kitty-red);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .reason-card p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Big Heart Section */
+        .heart-section {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+        }
+
+        .big-heart {
+            font-size: 150px;
+            display: inline-block;
+            animation: heartbeat 1.2s ease-in-out infinite;
+            filter: drop-shadow(0 10px 30px rgba(255,20,147,0.5));
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.15); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.1); }
+        }
+
+        .heart-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            color: var(--hello-kitty-red);
+            margin-top: 20px;
+        }
+
+        /* Promise Section */
+        .promise-section {
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 50%, #e31c79 100%);
+            padding: 60px 30px;
+            margin: 40px 0;
+            border-radius: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promise-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 10 L35 25 L30 20 L25 25 Z' fill='rgba(255,255,255,0.1)'/%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .promise-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+        }
+
+        .promise-content h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .promise-list {
+            list-style: none;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .promise-list li {
+            font-size: 1.3rem;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .promise-list li:last-child {
+            border-bottom: none;
+        }
+
+        .promise-list li::before {
+            content: "💖";
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, transparent, rgba(255,182,193,0.5));
+        }
+
+        .footer-kitty {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.8rem;
+            color: var(--hello-kitty-red);
+        }
+
+        .footer-date {
+            color: #888;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .sparkle {
+            display: inline-block;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .photo-card {
+                transform: rotate(0deg) !important;
+            }
+
+            .kitty-face {
+                width: 60px;
+                height: 60px;
+            }
+
+            .big-heart {
+                font-size: 100px;
+            }
+
+            .love-message {
+                padding: 30px 20px;
+                margin: 30px 15px;
+            }
+        }
+
+        /* Image placeholder styling */
+        .photo-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #ffb6c1 0%, #ff69b4 50%, #ff1493 100%);
+            border-radius: 15px;
+            border: 4px solid var(--soft-pink);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .photo-placeholder span {
+            font-size: 1rem;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts" id="hearts-container"></div>
+
+    <!-- Kitty Decorations -->
+    <div class="kitty-decoration" style="top: 10%; left: 5%;">🎀</div>
+    <div class="kitty-decoration" style="top: 30%; right: 3%;">💕</div>
+    <div class="kitty-decoration" style="top: 60%; left: 8%;">🌸</div>
+    <div class="kitty-decoration" style="top: 80%; right: 5%;">🎀</div>
+    <div class="kitty-decoration" style="top: 45%; left: 2%;">💖</div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="main-title">Para Ti, Mi Amor</h1>
+            <p class="subtitle">~ Una sorpresa especial de Hello Kitty ~</p>
+        </header>
+
+        <!-- Hello Kitty Banner -->
+        <div class="kitty-banner">
+            <div class="kitty-face">
+                <div class="eyes">
+                    <div class="eye"></div>
+                    <div class="eye"></div>
+                </div>
+                <div class="nose"></div>
+                <div class="whiskers">
+                    <div class="whisker"></div>
+                    <div class="whisker"></div>
+                    <div class="whisker"></div>
+                    <div class="whisker"></div>
+                    <div class="whisker"></div>
+                    <div class="whisker"></div>
+                </div>
+                <div class="bow">🎀</div>
+            </div>
+            <span style="font-size: 3rem;">💕</span>
+            <div class="kitty-face">
+                <div class="eyes">
+                    <div class="eye"></div>
+                    <div class="eye"></div>
+                </div>
+                <div class="nose"></div>
+                <div class="whiskers">
+                    <div class="whisker"></div>
+                    <div class="whisker"></div>
+                    <div class="whisker"></div>
+                    <div class="whisker"></div>
+                    <div class="whisker"></div>
+                    <div class="whisker"></div>
+                </div>
+                <div class="bow">🎀</div>
+            </div>
+        </div>
+
+        <!-- Love Message -->
+        <div class="love-message">
+            <h2>Mi Princesa Hermosa 👑</h2>
+            <p>
+                Desde el momento que empezamos a hablar, supe que eras alguien muy especial.
+                Cada mensaje tuyo me hace sonreír, cada momento contigo es un regalo.
+                Aunque la distancia nos separa, mi corazón siempre está cerca del tuyo.
+                <br><br>
+                <span class="sparkle">✨</span> Eres la persona más increíble que he conocido <span class="sparkle">✨</span>
+                <br><br>
+                Quiero que sepas que te quiero mucho, y que cada día pienso en ti.
+                Hice esta página especial de Hello Kitty porque sé cuánto te gusta,
+                y porque mereces algo tan lindo como tú. 💖
+            </p>
+        </div>
+
+        <!-- Photo Gallery -->
+        <section class="gallery-section">
+            <h2 class="gallery-title">Nuestros Momentos</h2>
+            <div class="photo-gallery">
+                <div class="photo-card">
+                    <img src="images/foto1.jpg" alt="Nosotros juntos" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="photo-placeholder" style="display: none;">
+                        📷
+                        <span>foto1.jpg</span>
+                    </div>
+                    <p class="photo-caption">Momentos especiales contigo 💕</p>
+                </div>
+                <div class="photo-card">
+                    <img src="images/foto2.jpg" alt="Recuerdos bonitos" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="photo-placeholder" style="display: none;">
+                        📷
+                        <span>foto2.jpg</span>
+                    </div>
+                    <p class="photo-caption">Siempre en mi corazón 💖</p>
+                </div>
+                <div class="photo-card">
+                    <img src="images/foto3.jpg" alt="Juntos siempre" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="photo-placeholder" style="display: none;">
+                        📷
+                        <span>foto3.jpg</span>
+                    </div>
+                    <p class="photo-caption">Mi persona favorita 🌸</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reasons Section -->
+        <section class="reasons-section">
+            <h2 class="reasons-title">Por Qué Eres Especial 💗</h2>
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <span class="reason-icon">😊</span>
+                    <h3>Tu Sonrisa</h3>
+                    <p>Tu sonrisa ilumina mis días más oscuros y me hace el hombre más feliz del mundo.</p>
+                </div>
+                <div class="reason-card">
+                    <span class="reason-icon">💭</span>
+                    <h3>Tu Forma de Ser</h3>
+                    <p>Eres única, especial, y perfecta exactamente como eres. No cambies nunca.</p>
+                </div>
+                <div class="reason-card">
+                    <span class="reason-icon">🦋</span>
+                    <h3>Las Mariposas</h3>
+                    <p>Cada vez que hablamos siento mariposas en el estómago. Eso es lo que provocas en mí.</p>
+                </div>
+                <div class="reason-card">
+                    <span class="reason-icon">🌟</span>
+                    <h3>Mi Estrella</h3>
+                    <p>Entre millones de personas, te encontré a ti. Y eso me hace muy afortunado.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Big Heart Section -->
+        <section class="heart-section">
+            <div class="big-heart">❤️</div>
+            <p class="heart-text">Este corazón late solo por ti</p>
+        </section>
+
+        <!-- Promise Section -->
+        <section class="promise-section">
+            <div class="promise-content">
+                <h2>Mis Promesas Para Ti 🎀</h2>
+                <ul class="promise-list">
+                    <li>Siempre hacerte sentir especial</li>
+                    <li>Estar ahí cuando me necesites</li>
+                    <li>Hacerte reír todos los días</li>
+                    <li>Quererte más y más cada día</li>
+                    <li>Nunca dejarte sola</li>
+                    <li>Luchar por nosotros, siempre</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Another Love Message -->
+        <div class="love-message">
+            <h2>De Mi Corazón al Tuyo 💌</h2>
+            <p>
+                Sé que el amor a distancia no es fácil, pero contigo vale la pena.
+                Cada segundo de espera, cada mensaje, cada llamada... todo vale la pena porque eres tú.
+                <br><br>
+                No sé qué nos depara el futuro, pero sé que quiero que estés en él.
+                <br><br>
+                <strong style="color: var(--hello-kitty-red); font-size: 1.4rem;">
+                    Te quiero muchísimo, mi princesa. 💕
+                </strong>
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-kitty">
+                <span style="font-size: 40px;">🎀</span>
+                <span style="font-size: 50px;">💖</span>
+                <span style="font-size: 40px;">🎀</span>
+            </div>
+            <p class="footer-text">Con todo mi amor, para ti 💕</p>
+            <p class="footer-date">Hecho con mucho amor ~ 2024</p>
+        </footer>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const hearts = ['❤️', '💕', '💖', '💗', '💓', '💝', '🎀', '🌸'];
+
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 8 + 's';
+                heart.style.animationDuration = (6 + Math.random() * 4) + 's';
+                heart.style.fontSize = (15 + Math.random() * 20) + 'px';
+                container.appendChild(heart);
+            }
+        }
+
+        // Create sparkle effect on click
+        document.addEventListener('click', function(e) {
+            const sparkle = document.createElement('div');
+            sparkle.textContent = ['✨', '💖', '🌸', '💕'][Math.floor(Math.random() * 4)];
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = e.clientX + 'px';
+            sparkle.style.top = e.clientY + 'px';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.fontSize = '30px';
+            sparkle.style.zIndex = '9999';
+            sparkle.style.animation = 'sparkle-pop 0.6s ease-out forwards';
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => sparkle.remove(), 600);
+        });
+
+        // Add sparkle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkle-pop {
+                0% { transform: scale(0) rotate(0deg); opacity: 1; }
+                50% { transform: scale(1.5) rotate(180deg); opacity: 1; }
+                100% { transform: scale(0) rotate(360deg) translateY(-50px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        createHearts();
+
+        // Parallax effect for kitty decorations
+        document.addEventListener('mousemove', function(e) {
+            const decorations = document.querySelectorAll('.kitty-decoration');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+
+            decorations.forEach((dec, i) => {
+                const speed = (i + 1) * 10;
+                const x = (mouseX - 0.5) * speed;
+                const y = (mouseY - 0.5) * speed;
+                dec.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
